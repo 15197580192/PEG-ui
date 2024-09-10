@@ -1,74 +1,54 @@
 <template>
     <div class="build-container">
-      <el-row :gutter="12">
-        <el-button type="warning" style="margin-left: 0px;" round icon="el-icon-plus" @click="addDatabase">新建数据库</el-button>
-      </el-row>
-      <el-row :gutter="12">
 
+      <el-row :gutter="12">
         <div class="box-card">
-          <el-table
-            :data="cards"
-            style="width: 100%;border-radius: 10px;overflow: hidden;">
-            <el-table-column
-              label="数据库名称"
-              prop="dbName">
-            </el-table-column>
-            <el-table-column
-              align="right">
-              <template slot-scope="scope">
+          <div v-for="(item, index) in cards" :key="index" class="onecard">
+            <el-card shadow="always">
+              <div slot="header" >
+                <span class="nametext">{{ "Database" }}</span>
                 <el-button
-                  size="mini"
-                  type="danger"
-                  @click="deleteHandle(scope.row)">删除</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-<!--          <div v-for="(item, index) in cards" :key="index" class="onecard">-->
-<!--            <el-card shadow="always" :style="{ borderRadius: '15px', overflow: 'hidden' }">-->
-<!--              <div slot="header" >-->
-<!--                <span class="nametext">{{ "数据库" }}</span>-->
-<!--                <el-button-->
-<!--                  @click="deleteHandle(item)"-->
-<!--                  style="float: right; padding: 3px 0;color: #909399"-->
-<!--                  type="text"-->
-<!--                  plain >删除</el-button>-->
-<!--              </div>-->
-<!--              <div class="numtext">-->
-<!--                {{ item.dbName }}-->
-<!--                <div class="in-numtext" ></div>-->
-<!--              </div>-->
-<!--            </el-card>-->
-<!--          </div>-->
-
+                  @click="deleteHandle(item)"
+                  icon="el-icon-remove-outline"
+                  style="float: right; padding: 3px 0;color: #909399"
+                  type="text"
+                  plain >Delete</el-button>
+              </div>
+              <div class="numtext">
+                {{ item.dbName }}
+                <br>
+                <div class="in-numtext" >triple num:{{ item.dbNum }}</div>
+              </div>
+            </el-card>
+          </div>
         </div>
       </el-row>
-<!--      <el-row :gutter="12">-->
-<!--        <el-col :span="24">-->
-<!--          <div class="box-card">-->
-<!--&lt;!&ndash;            <div class="onecard">&ndash;&gt;-->
-<!--&lt;!&ndash;              <el-card shadow="always" @click.native="addDatabase">&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="nametext">Database Number</div>&ndash;&gt;-->
-<!--&lt;!&ndash;                <el-divider></el-divider>&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="numtext">&ndash;&gt;-->
-<!--&lt;!&ndash;                  {{total}}&ndash;&gt;-->
-<!--&lt;!&ndash;                  <div class="in-numtext" ></div>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;              </el-card>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+      <el-row :gutter="12">
+        <el-col :span="24">
+          <div class="box-card">
+            <div class="onecard">
+              <el-card shadow="always" @click.native="addDatabase">
+                <div class="nametext">Database Number</div>
+                <el-divider></el-divider>
+                <div class="numtext">
+                  {{total}}
+                  <div class="in-numtext" ></div>
+                </div>
+              </el-card>
+            </div>
+            <div class="onecard">
+              <el-card shadow="always" @click.native="addDatabase">
+                <div class="nametext">Create Datebase</div>
+                <el-divider></el-divider>
+                <div style="height: 46px;display: flex;justify-content: center;">
+                  <i class="el-icon-plus"></i>
+                </div>
+              </el-card>
+            </div>
+          </div>
+        </el-col>
 
-<!--            <div class="onecard">-->
-<!--              <el-card shadow="always" @click.native="addDatabase">-->
-<!--                <div class="nametext">新建数据库</div>-->
-<!--                <el-divider></el-divider>-->
-<!--                <div style="height: 46px;display: flex;justify-content: center;">-->
-<!--                  <i class="el-icon-plus"></i>-->
-<!--                </div>-->
-<!--              </el-card>-->
-<!--            </div>-->
-<!--            </div>-->
-<!--        </el-col>-->
-
-<!--      </el-row>-->
+      </el-row>
         <add-database v-if="addVisible" ref="addDatabase" @refreshDataList="getList"></add-database>
     </div>
 </template>
@@ -88,30 +68,14 @@
                 total: 0,
                 cards:[
                     {
-                        dbName: "test"
+
+                        dbName: "re"
                     },
                     {
-                        dbName: "test1"
+
+                        dbName: 'fdff'
                     }
-                ],
-              tableData: [{
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-              }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1517 弄'
-              }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1519 弄'
-              }, {
-                date: '2016-05-03',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1516 弄'
-              }],
-              search: ''
+                ]
 
             }
         },
@@ -122,9 +86,6 @@
             this.getList()
         },
         methods: {
-          handleDelete(index, row) {
-            console.log(index, row);
-          },
             getList() {
                 this.listLoading = true
 
@@ -147,7 +108,6 @@
              * @param item:选中的数据库信息
              */
             deleteHandle(item){
-              console.log(item)
                 let parmas = {
                     dbname: item.dbName,
                 };
@@ -195,18 +155,19 @@
 
 <style scoped>
   .build-container{
+    width: 100vh;
     height: 100%;
-    padding: 0 10px 10px 10px
+    padding: 20px
   }
   body {
   }
   .box-card {
-
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: flex-start;
     margin-top: 24px;
+    width: 100vw;
   }
   .onecard {
     width: 19%;
@@ -217,7 +178,7 @@
   .numtext {
 
     font-size: 40px;
-    color: black;
+    color: rgb(95,184,120);
   }
   .in-numtext {
     display: inline-block;

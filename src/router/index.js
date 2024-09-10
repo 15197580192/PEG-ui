@@ -52,8 +52,8 @@ export const constantRoutes = [
   },
   {
     path: '/login',
-    // component: () => import('@/views/login/index'),
-    component: () => import('@/views/icons/index'),
+    // component: () => import('@/views/build/index'),
+    component: () => import('@/views/login/index'),
     hidden: true
   },
   {
@@ -78,25 +78,25 @@ export const constantRoutes = [
     children: [
       {
         path: 'build',
-        component: () => import('@/views/icons/index'),
+        component: () => import('@/views/build/index'),
         name: 'Load',
         meta: { title: 'Load', icon: 'guide', affix: true }
       }
     ]
   },
-  {
-    path: '/testDemo',
-    component: Layout,
-    redirect: '/testDemo',
-    children: [
-      {
-        path: 'testDemo',
-        component: () => import('@/views/testDemo/index'),
-        name: 'testDemo',
-        meta: { title: 'testDemo', icon: 'guide', affix: true }
-      }
-    ]
-  },
+  // {
+  //   path: '/testDemo',
+  //   component: Layout,
+  //   redirect: '/testDemo',
+  //   children: [
+  //     {
+  //       path: 'testDemo',
+  //       component: () => import('@/views/testDemo/index'),
+  //       name: 'testDemo',
+  //       meta: { title: 'testDemo', icon: 'guide', affix: true }
+  //     }
+  //   ]
+  // },
   // {
   //   path: '/documentation',
   //   component: Layout,

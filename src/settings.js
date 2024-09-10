@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'FedTopK',
+  title: 'PEG',
 
   /**
    * @type {boolean} true | false

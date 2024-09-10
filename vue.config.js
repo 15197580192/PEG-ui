@@ -6,7 +6,7 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const name = defaultSettings.title || 'FedTopK' // page title
+const name = defaultSettings.title || 'PEG' // page title
 
 // If your port is set to 80,
 // use administrator privileges to execute the command line.
@@ -38,7 +38,7 @@ module.exports = {
     },
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
-        target: 'http://115.157.197.212:18081',
+        target: 'http://127.0.0.1:18081',
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
